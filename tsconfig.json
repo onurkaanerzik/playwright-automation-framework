@@ -18,7 +18,7 @@
     "playwright.config.ts",
     "src/**/*.ts",
     "tests/**/*.ts"
-  ],
+, "src/config/enviroment"  ],
   "exclude": [
     "node_modules",
     "playwright-report",

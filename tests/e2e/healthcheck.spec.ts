@@ -1,5 +1,9 @@
-import { test, expect } from '@playwright/test';
+import { expect, test } from '../../src/fixtures';
 
-test('Framework is configured correctly', async () => {
-  expect(true).toBe(true);
+test.describe('Framework health check', () => {
+  test('should open the configured application', async ({ page }) => {
+    await page.goto('/');
+
+    await expect(page).toHaveTitle('Example Domain');
+  });
 });

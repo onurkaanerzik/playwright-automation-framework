@@ -1,9 +1,8 @@
-import { test } from '@playwright/test';
-import { HomePage } from '../../src/pages/HomePage';
+import { test } from '../../src/fixtures';
 
-test('Home page opens successfully', async ({ page }) => {
-  const homePage = new HomePage(page);
-
-  await homePage.open();
-  await homePage.verifyPageLoaded();
+test.describe('Home page', () => {
+  test('should load successfully', async ({ homePage }) => {
+    await homePage.open();
+    await homePage.verifyPageLoaded();
+  });
 });
