@@ -1,12 +1,12 @@
 //const {test} = require("@playwright/test");
 
 const age = 15;
-
+/*
 if (age < 18) {
 
     throw new Error("18 yasindan kucuk");
 }
-
+*/
 console.log(age);
 
 /*
