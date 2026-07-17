@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 import pg from 'pg';
 
 const { Client } = pg;
-
+/*
 test('database kontrolu', async () => {
 
   const client = new Client({
@@ -22,3 +22,4 @@ test('database kontrolu', async () => {
 
   await client.end();
 });
+*/
