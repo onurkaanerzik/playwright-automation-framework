@@ -1,6 +1,7 @@
 import 'dotenv/config';
+
 import { getEnvironmentProfile } from './profiles';
-import {
+import type {
   EnvironmentConfig,
   EnvironmentName,
 } from './types';
@@ -29,11 +30,11 @@ const resolveEnvironmentName = (): EnvironmentName => {
   return requestedEnvironment as EnvironmentName;
 };
 
+export const environmentName = resolveEnvironmentName();
 
-export 
-const environmentName = resolveEnvironmentName();
 const profile = getEnvironmentProfile(environmentName);
-const environment: EnvironmentConfig = {
+
+export const environment: EnvironmentConfig = {
   ...profile,
   baseUrl: process.env.BASE_URL ?? profile.baseUrl,
   apiBaseUrl: process.env.API_BASE_URL ?? profile.apiBaseUrl,

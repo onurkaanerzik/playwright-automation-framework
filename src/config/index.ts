@@ -1,4 +1,8 @@
-export { environment } from './environment';
+export {
+  environment,
+  environmentName,
+} from './environment';
+
 export type {
   EnvironmentConfig,
   EnvironmentName,

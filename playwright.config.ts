@@ -6,26 +6,35 @@ export default defineConfig({
 
   fullyParallel: true,
 
-  forbidOnly: Boolean(process.env.CI),
+  forbidOnly: !!process.env.CI,
 
-  retries: process.env.CI
-    ? environment.retries
-    : 0,
+  retries: process.env.CI ? 2 : 0,
 
-  workers: process.env.CI
-    ? environment.workers
-    : undefined,
+  workers: process.env.CI ? 1 : undefined,
 
   reporter: [
     ['list'],
-    ['html', { open: 'never' }],
+    ['html', { outputFolder: 'playwright-report', open: 'never' }],
   ],
 
+  timeout: 30_000,
+
+  expect: {
+    timeout: 5_000,
+  },
+
   use: {
-    baseURL: environment.baseUrl,
+    baseURL: 'https://example.com',
+
     trace: 'on-first-retry',
+
     screenshot: 'only-on-failure',
+
     video: 'retain-on-failure',
+
+    actionTimeout: 10_000,
+
+    navigationTimeout: 15_000,
   },
 
   projects: [
@@ -33,6 +42,20 @@ export default defineConfig({
       name: 'chromium',
       use: {
         ...devices['Desktop Chrome'],
+      },
+    },
+
+    {
+      name: 'firefox',
+      use: {
+        ...devices['Desktop Firefox'],
+      },
+    },
+
+    {
+      name: 'webkit',
+      use: {
+        ...devices['Desktop Safari'],
       },
     },
   ],
