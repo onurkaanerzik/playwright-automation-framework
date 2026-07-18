@@ -24,7 +24,7 @@ export default defineConfig({
   },
 
   use: {
-    baseURL: 'https://example.com',
+    baseURL: environment.baseUrl,
 
     trace: 'on-first-retry',
 
@@ -39,7 +39,13 @@ export default defineConfig({
 
   projects: [
     {
+      name: 'api',
+      testMatch: /tests\/api\/.*\.spec\.ts/,
+    },
+
+    {
       name: 'chromium',
+      testMatch: /tests\/e2e\/.*\.spec\.ts/,
       use: {
         ...devices['Desktop Chrome'],
       },
@@ -47,6 +53,7 @@ export default defineConfig({
 
     {
       name: 'firefox',
+      testMatch: /tests\/e2e\/.*\.spec\.ts/,
       use: {
         ...devices['Desktop Firefox'],
       },
@@ -54,6 +61,7 @@ export default defineConfig({
 
     {
       name: 'webkit',
+      testMatch: /tests\/e2e\/.*\.spec\.ts/,
       use: {
         ...devices['Desktop Safari'],
       },

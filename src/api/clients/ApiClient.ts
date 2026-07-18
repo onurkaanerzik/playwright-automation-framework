@@ -51,6 +51,17 @@ export class ApiClient {
     });
   }
 
+  async patch<TBody>(
+    path: string,
+    options: BodyRequestOptions<TBody>,
+  ): Promise<APIResponse> {
+    return this.request.patch(this.buildUrl(path), {
+      data: options.data,
+      headers: options.headers,
+      params: options.query,
+    });
+  }
+
   async delete(
     path: string,
     options: RequestOptions = {},
@@ -61,7 +72,9 @@ export class ApiClient {
     });
   }
 
-  async expectSuccessfulResponse(response: APIResponse): Promise<void> {
+  async expectSuccessfulResponse(
+    response: APIResponse,
+  ): Promise<void> {
     await expect(
       response,
       `Expected a successful API response but received ${response.status()}`,
@@ -76,7 +89,9 @@ export class ApiClient {
 
   private buildUrl(path: string): string {
     const normalizedBaseUrl = this.baseUrl.replace(/\/$/, '');
-    const normalizedPath = path.startsWith('/') ? path : `/${path}`;
+    const normalizedPath = path.startsWith('/')
+      ? path
+      : `/${path}`;
 
     return `${normalizedBaseUrl}${normalizedPath}`;
   }

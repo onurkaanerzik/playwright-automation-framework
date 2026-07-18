@@ -1,9 +1,12 @@
-import { expect, test } from '../../src/fixtures';
+import { expect, test } from '@playwright/test';
 
 test.describe('Framework health check', () => {
-  test('should open the configured application', async ({ page }) => {
-    await page.goto('/');
+  test(
+    'should open the configured application @ui @smoke',
+    async ({ page }) => {
+      await page.goto('/');
 
-    await expect(page).toHaveTitle('Example Domain');
-  });
+      await expect(page).toHaveTitle('Swag Labs');
+    },
+  );
 });

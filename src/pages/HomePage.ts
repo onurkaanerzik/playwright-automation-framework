@@ -9,7 +9,7 @@ export class HomePage extends BasePage {
   readonly footer: Footer;
   readonly navigationBar: NavigationBar;
 
-  private readonly pageHeading: Locator;
+  private readonly appLogo: Locator;
 
   constructor(page: Page) {
     super(page);
@@ -18,9 +18,7 @@ export class HomePage extends BasePage {
     this.footer = new Footer(page);
     this.navigationBar = new NavigationBar(page);
 
-    this.pageHeading = page.getByRole('heading', {
-      name: 'Example Domain',
-    });
+    this.appLogo = page.locator('.login_logo');
   }
 
   async open(): Promise<void> {
@@ -28,6 +26,7 @@ export class HomePage extends BasePage {
   }
 
   async verifyPageLoaded(): Promise<void> {
-    await expect(this.pageHeading).toBeVisible();
+    await expect(this.page).toHaveTitle('Swag Labs');
+    await expect(this.appLogo).toBeVisible();
   }
 }
