@@ -13,7 +13,13 @@
     "test:debug": "playwright test --debug",
     "test:chromium": "playwright test --project=chromium",
     "report": "playwright show-report",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "test:local": "cross-env APP_ENV=local playwright test",
+    "test:dev": "cross-env APP_ENV=dev playwright test",
+    "test:staging": "cross-env APP_ENV=staging playwright test",
+    "test:production": "cross-env APP_ENV=production playwright test",
+    "test:ui": "playwright test --ui",
+    "test:report": "playwright show-report"
   },
   "keywords": [
     "playwright",
@@ -27,6 +33,7 @@
   "devDependencies": {
     "@playwright/test": "^1.59.1",
     "@types/node": "^25.6.2",
+    "cross-env": "^10.1.0",
     "typescript": "^5.9.3"
   },
   "dependencies": {
