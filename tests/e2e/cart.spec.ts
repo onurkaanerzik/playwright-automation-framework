@@ -1,63 +1,66 @@
 import { test } from '../../src/fixtures';
+import { products } from '../../src/data/products';
 
-test.describe('Cart', () => {
-  test('should add a product to the cart', async ({
-    loginPage,
-    inventoryPage,
-    cartPage,
-  }) => {
-    await loginPage.open();
+test.describe(
+  'Cart',
+  { tag: ['@ui', '@regression'] },
+  () => {
+    test(
+      'should add a product to the cart',
+      async ({
+        inventoryPage,
+        cartPage,
+      }) => {
+        const productName = products.backpack.name;
 
-    await loginPage.login(
-      'standard_user',
-      'secret_sauce',
+        await inventoryPage.open();
+
+        await inventoryPage.verifyPageLoaded();
+
+        await inventoryPage.addProductToCart(
+          productName,
+        );
+
+        await inventoryPage.verifyCartItemCount(1);
+
+        await inventoryPage.openCart();
+
+        await cartPage.verifyPageLoaded();
+
+        await cartPage.verifyProductExists(
+          productName,
+        );
+      },
     );
 
-    await inventoryPage.verifyPageLoaded();
+    test(
+      'should remove a product from the cart',
+      async ({
+        inventoryPage,
+        cartPage,
+      }) => {
+        const productName = products.backpack.name;
 
-    await inventoryPage.addProductToCart(
-      'Sauce Labs Backpack',
+        await inventoryPage.open();
+
+        await inventoryPage.verifyPageLoaded();
+
+        await inventoryPage.addProductToCart(
+          productName,
+        );
+
+        await inventoryPage.openCart();
+
+        await cartPage.verifyPageLoaded();
+
+        await cartPage.removeProduct(
+          productName,
+        );
+
+        await cartPage.verifyProductDoesNotExist(
+          productName,
+        );
+      },
     );
-
-    await inventoryPage.verifyCartItemCount(1);
-
-    await inventoryPage.openCart();
-
-    await cartPage.verifyPageLoaded();
-
-    await cartPage.verifyProductExists(
-      'Sauce Labs Backpack',
-    );
-  });
-
-  test('should remove a product from the cart', async ({
-    loginPage,
-    inventoryPage,
-    cartPage,
-  }) => {
-    await loginPage.open();
-
-    await loginPage.login(
-      'standard_user',
-      'secret_sauce',
-    );
-
-    await inventoryPage.verifyPageLoaded();
-
-    await inventoryPage.addProductToCart(
-      'Sauce Labs Backpack',
-    );
-
-    await inventoryPage.openCart();
-
-    await cartPage.verifyPageLoaded();
-
-    await cartPage.removeProduct(
-      'Sauce Labs Backpack',
-    );
-
-    await cartPage.verifyProductDoesNotExist(
-      'Sauce Labs Backpack',
-    );
-  });
-});
+  },
+);

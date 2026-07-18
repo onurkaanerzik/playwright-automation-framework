@@ -88,6 +88,42 @@ export class CheckoutStepTwoPage extends BasePage {
     await expect(this.total).toBeVisible();
   }
 
+  async verifyItemTotal(
+    expectedValue: string,
+  ): Promise<void> {
+    Logger.info(
+      `Verifying item total: "${expectedValue}"`,
+    );
+
+    await expect(this.itemTotal).toContainText(
+      expectedValue,
+    );
+  }
+
+  async verifyTax(
+    expectedValue: string,
+  ): Promise<void> {
+    Logger.info(
+      `Verifying tax: "${expectedValue}"`,
+    );
+
+    await expect(this.tax).toContainText(
+      expectedValue,
+    );
+  }
+
+  async verifyTotal(
+    expectedValue: string,
+  ): Promise<void> {
+    Logger.info(
+      `Verifying total: "${expectedValue}"`,
+    );
+
+    await expect(this.total).toContainText(
+      expectedValue,
+    );
+  }
+
   // Private Helpers
   private getCheckoutItem(
     productName: string,

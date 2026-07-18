@@ -4,10 +4,15 @@ export type EnvironmentName =
   | 'staging'
   | 'production';
 
-export interface EnvironmentConfig {
+export type EnvironmentConfig = {
   name: EnvironmentName;
   baseUrl: string;
   apiBaseUrl: string;
   retries: number;
-  workers: number | undefined;
-}
+  workers?: number;
+
+  apiUser: {
+    username: string;
+    password: string;
+  };
+};

@@ -10,6 +10,11 @@ const profiles: Record<EnvironmentName, EnvironmentConfig> = {
     apiBaseUrl: 'https://jsonplaceholder.typicode.com',
     retries: 0,
     workers: undefined,
+
+    apiUser: {
+      username: 'admin',
+      password: 'password123',
+    },
   },
 
   dev: {
@@ -18,6 +23,11 @@ const profiles: Record<EnvironmentName, EnvironmentConfig> = {
     apiBaseUrl: 'https://jsonplaceholder.typicode.com',
     retries: 1,
     workers: undefined,
+
+    apiUser: {
+      username: 'admin',
+      password: 'password123',
+    },
   },
 
   staging: {
@@ -26,6 +36,11 @@ const profiles: Record<EnvironmentName, EnvironmentConfig> = {
     apiBaseUrl: 'https://jsonplaceholder.typicode.com',
     retries: 1,
     workers: 2,
+
+    apiUser: {
+      username: 'admin',
+      password: 'password123',
+    },
   },
 
   production: {
@@ -34,6 +49,11 @@ const profiles: Record<EnvironmentName, EnvironmentConfig> = {
     apiBaseUrl: 'https://jsonplaceholder.typicode.com',
     retries: 2,
     workers: 1,
+
+    apiUser: {
+      username: 'admin',
+      password: 'password123',
+    },
   },
 };
 

@@ -36,6 +36,14 @@ export class LoginPage extends BasePage {
     await this.clickLogin();
   }
 
+  async verifyPageLoaded(): Promise<void> {
+    Logger.info('Verifying login page is loaded');
+
+    await expect(this.usernameInput).toBeVisible();
+    await expect(this.passwordInput).toBeVisible();
+    await expect(this.loginButton).toBeVisible();
+  }
+
   async verifyErrorMessage(
     expectedMessage: string,
   ): Promise<void> {

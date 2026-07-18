@@ -3,6 +3,7 @@ export { UsersApi } from './resources/UsersApi';
 export { BookingApi } from './resources/BookingApi';
 export { AuthApi } from './resources/AuthApi';
 export { ApiAssertions } from './assertions/ApiAssertions';
+export type { AuthToken } from './models/auth.model';
 
 export type {
   ApiUser,

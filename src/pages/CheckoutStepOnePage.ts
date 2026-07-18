@@ -10,6 +10,7 @@ export class CheckoutStepOnePage extends BasePage {
   private readonly postalCodeInput: Locator;
   private readonly continueButton: Locator;
   private readonly cancelButton: Locator;
+  private readonly errorMessage: Locator;
 
   constructor(page: Page) {
     super(page);
@@ -39,6 +40,10 @@ export class CheckoutStepOnePage extends BasePage {
 
     this.cancelButton = page.locator(
       '[data-test="cancel"]',
+    );
+
+    this.errorMessage = page.locator(
+      '[data-test="error"]',
     );
   }
 
@@ -78,5 +83,18 @@ export class CheckoutStepOnePage extends BasePage {
     );
 
     await expect(this.pageTitle).toBeVisible();
+  }
+
+  async verifyValidationMessage(
+    expectedMessage: string,
+  ): Promise<void> {
+    Logger.info(
+      `Verifying validation message: "${expectedMessage}"`,
+    );
+
+    await expect(this.errorMessage).toBeVisible();
+    await expect(this.errorMessage).toContainText(
+      expectedMessage,
+    );
   }
 }

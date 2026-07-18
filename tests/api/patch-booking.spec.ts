@@ -1,6 +1,8 @@
 import { expect, test } from '../../src/fixtures';
 import { ApiAssertions } from '../../src/api';
 import { createBooking } from '../../src/data';
+import { environment } from '../../src/config';
+import type { AuthResponse, CreateBookingResponse } from '../../src/api';
 
 test.describe(
   'Patch Booking API',
@@ -22,7 +24,7 @@ test.describe(
 
         ApiAssertions.expectStatus(createResponse, 200);
 
-        const createdBody =
+        const createdBody: CreateBookingResponse =
           await createResponse.json();
 
         const bookingId = createdBody.bookingid;
@@ -30,21 +32,20 @@ test.describe(
         // Get token
         const tokenResponse =
           await authApi.createToken({
-            username: 'admin',
-            password: 'password123',
+            username: environment.apiUser.username,
+            password: environment.apiUser.password,
           });
 
         ApiAssertions.expectStatus(tokenResponse, 200);
 
-        const tokenBody =
+        const tokenBody: AuthResponse =
           await tokenResponse.json();
 
-        // Patch booking
         const patchResponse =
           await bookingApi.partialUpdateBooking(
             bookingId,
             {
-              firstname: 'Dilek',
+              firstname: 'Onur',
             },
             tokenBody.token,
           );
@@ -55,7 +56,7 @@ test.describe(
         const patchedBody =
           await patchResponse.json();
 
-        expect(patchedBody.firstname).toBe('Dilek');
+        expect(patchedBody.firstname).toBe('Onur');
 
         // Değişmeyen alanlar korunmalı
         expect(patchedBody.lastname).toBe(

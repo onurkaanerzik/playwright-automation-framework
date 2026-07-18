@@ -37,36 +37,47 @@ export default defineConfig({
     navigationTimeout: 15_000,
   },
 
-  projects: [
-    {
-      name: 'api',
-      testMatch: /tests\/api\/.*\.spec\.ts/,
-    },
+projects: [
+  {
+    name: 'setup',
+    testMatch: /tests\/auth\/.*\.setup\.ts/,
+  },
 
-    {
-      name: 'chromium',
-      testMatch: /tests\/e2e\/.*\.spec\.ts/,
-      use: {
-        ...devices['Desktop Chrome'],
-      },
-    },
+  {
+    name: 'api',
+    testMatch: /tests\/api\/.*\.spec\.ts/,
+  },
 
-    {
-      name: 'firefox',
-      testMatch: /tests\/e2e\/.*\.spec\.ts/,
-      use: {
-        ...devices['Desktop Firefox'],
-      },
+  {
+    name: 'chromium',
+    dependencies: ['setup'],
+    testMatch: /tests\/e2e\/.*\.spec\.ts/,
+    use: {
+      ...devices['Desktop Chrome'],
+      storageState: '.auth/user.json',
     },
+  },
 
-    {
-      name: 'webkit',
-      testMatch: /tests\/e2e\/.*\.spec\.ts/,
-      use: {
-        ...devices['Desktop Safari'],
-      },
+  {
+    name: 'firefox',
+    dependencies: ['setup'],
+    testMatch: /tests\/e2e\/.*\.spec\.ts/,
+    use: {
+      ...devices['Desktop Firefox'],
+      storageState: '.auth/user.json',
     },
-  ],
+  },
+
+  {
+    name: 'webkit',
+    dependencies: ['setup'],
+    testMatch: /tests\/e2e\/.*\.spec\.ts/,
+    use: {
+      ...devices['Desktop Safari'],
+      storageState: '.auth/user.json',
+    },
+  },
+],
 
   outputDir: 'test-results',
 });

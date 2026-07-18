@@ -3,11 +3,13 @@ import { BasePage } from './BasePage';
 import { Logger } from '../utils';
 
 export class InventoryPage extends BasePage {
-  // Locators
   private readonly pageTitle: Locator;
   private readonly appLogo: Locator;
   private readonly shoppingCartLink: Locator;
   private readonly cartBadge: Locator;
+  private readonly sortDropdown: Locator;
+  private readonly productNames: Locator;
+  private readonly productPrices: Locator;
 
   constructor(page: Page) {
     super(page);
@@ -27,9 +29,25 @@ export class InventoryPage extends BasePage {
     this.cartBadge = page.locator(
       '[data-test="shopping-cart-badge"]',
     );
-  }
 
-  // Verification Methods
+    this.sortDropdown = page.locator(
+      '[data-test="product-sort-container"]',
+    );
+
+    this.productNames = page.locator(
+      '[data-test="inventory-item-name"]',
+    );
+
+    this.productPrices = page.locator(
+      '[data-test="inventory-item-price"]',
+    );
+  }
+  async open(): Promise<void> {
+    Logger.info('Opening inventory page');
+
+    await this.navigate('/inventory.html');
+  }
+  
   async verifyPageLoaded(): Promise<void> {
     Logger.info('Verifying inventory page is loaded');
 
@@ -50,7 +68,40 @@ export class InventoryPage extends BasePage {
     );
   }
 
-  // Business Actions
+  async sortProducts(
+    option: 'az' | 'za' | 'lohi' | 'hilo',
+  ): Promise<void> {
+    Logger.info(`Sorting products by "${option}"`);
+
+    await this.sortDropdown.selectOption(option);
+  }
+
+  async verifyProductsSortedByNameAscending(): Promise<void> {
+    const actualNames =
+      await this.productNames.allTextContents();
+
+    const expectedNames = [...actualNames].sort(
+      (first, second) =>
+        first.localeCompare(second),
+    );
+
+    expect(actualNames).toEqual(expectedNames);
+  }
+
+  async verifyProductsSortedByPriceDescending(): Promise<void> {
+    const actualPrices = (
+      await this.productPrices.allTextContents()
+    ).map((price) =>
+      Number.parseFloat(price.replace('$', '')),
+    );
+
+    const expectedPrices = [...actualPrices].sort(
+      (first, second) => second - first,
+    );
+
+    expect(actualPrices).toEqual(expectedPrices);
+  }
+
   async addProductToCart(
     productName: string,
   ): Promise<void> {

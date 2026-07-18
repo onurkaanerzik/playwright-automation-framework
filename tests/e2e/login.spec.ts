@@ -1,32 +1,35 @@
-import { test } from '../../src/fixtures';
+import { test } from '../../src/fixtures/app.fixture';
 
 test.describe('Login', () => {
-  test('should login successfully with valid credentials', async ({
-    loginPage,
-    inventoryPage,
-  }) => {
-    await loginPage.open();
+  test(
+    'should display an error for invalid credentials @ui @negative @regression',
+    async ({ loginPage }) => {
+      await loginPage.open();
 
-    await loginPage.login(
-      'standard_user',
-      'secret_sauce',
-    );
+      await loginPage.login(
+        'invalid_user',
+        'invalid_password',
+      );
 
-    await inventoryPage.verifyPageLoaded();
-  });
+      await loginPage.verifyErrorMessage(
+        'Username and password do not match any user in this service',
+      );
+    },
+  );
 
-  test('should display an error for invalid credentials', async ({
-    loginPage,
-  }) => {
-    await loginPage.open();
+  test(
+    'should display an error for a locked user @ui @negative @regression',
+    async ({ loginPage }) => {
+      await loginPage.open();
 
-    await loginPage.login(
-      'invalid_user',
-      'invalid_password',
-    );
+      await loginPage.login(
+        'locked_out_user',
+        'secret_sauce',
+      );
 
-    await loginPage.verifyErrorMessage(
-      'Username and password do not match',
-    );
-  });
+      await loginPage.verifyErrorMessage(
+        'Sorry, this user has been locked out',
+      );
+    },
+  );
 });

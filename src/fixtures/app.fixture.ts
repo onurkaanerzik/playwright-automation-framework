@@ -1,4 +1,5 @@
 import { expect, test as base } from '@playwright/test';
+import { products } from '../data/products';
 import {
   ApiClient,
   AuthApi,
@@ -24,9 +25,18 @@ type AppFixtures = {
   checkoutStepOnePage: CheckoutStepOnePage;
   checkoutStepTwoPage: CheckoutStepTwoPage;
   checkoutCompletePage: CheckoutCompletePage;
+
   usersApi: UsersApi;
   bookingApi: BookingApi;
   authApi: AuthApi;
+
+  customer: {
+    firstName: string;
+    lastName: string;
+    postalCode: string;
+  };
+
+  products: typeof products;
 };
 
 export const test = base.extend<AppFixtures>({
@@ -100,6 +110,18 @@ export const test = base.extend<AppFixtures>({
     );
 
     await use(new AuthApi(apiClient));
+  },
+
+  customer: async ({}, use) => {
+    await use({
+      firstName: 'John',
+      lastName: 'Doe',
+      postalCode: '10115',
+    });
+  },
+
+  products: async ({}, use) => {
+    await use(products);
   },
 });
 
