@@ -1,5 +1,6 @@
 import { expect, test } from '../../src/fixtures';
 import { ApiAssertions } from '../../src/api';
+import { createBooking } from '../../src/data';
 
 test.describe(
   'Booking API',
@@ -12,22 +13,65 @@ test.describe(
       {
         tag: '@smoke',
       },
-      async ({ bookingApi }) => {
-        const response = await bookingApi.getBooking(1);
+        async ({ bookingApi }) => {
+          const booking =
+            createBooking();
 
-        ApiAssertions.expectStatus(response, 200);
-        ApiAssertions.expectSuccess(response);
-        ApiAssertions.expectJson(response);
+          const createResponse =
+            await bookingApi.createBooking(
+              booking,
+            );
 
-        const booking = await response.json();
+          ApiAssertions.expectStatus(
+            createResponse,
+            200,
+          );
 
-        expect(booking.firstname).toBeTruthy();
-        expect(booking.lastname).toBeTruthy();
-        expect(typeof booking.totalprice).toBe('number');
-        expect(typeof booking.depositpaid).toBe('boolean');
+          const createdBody =
+            await createResponse.json();
 
-        expect(booking.bookingdates.checkin).toBeTruthy();
-        expect(booking.bookingdates.checkout).toBeTruthy();
+          const bookingId =
+            createdBody.bookingid;
+
+          const response =
+            await bookingApi.getBooking(
+              bookingId,
+            );
+
+          ApiAssertions.expectStatus(
+            response,
+            200,
+          );
+
+          ApiAssertions.expectSuccess(response);
+          ApiAssertions.expectJson(response);
+
+          const bookingResponse =
+            await response.json();
+
+          expect(
+            bookingResponse.firstname,
+          ).toBeTruthy();
+
+          expect(
+            bookingResponse.lastname,
+          ).toBeTruthy();
+
+          expect(
+            typeof bookingResponse.totalprice,
+          ).toBe('number');
+
+          expect(
+            typeof bookingResponse.depositpaid,
+          ).toBe('boolean');
+
+          expect(
+            bookingResponse.bookingdates.checkin,
+          ).toBeTruthy();
+
+          expect(
+            bookingResponse.bookingdates.checkout,
+          ).toBeTruthy();
       },
     );
   },

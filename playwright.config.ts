@@ -15,12 +15,18 @@ export default defineConfig({
   reporter: [
     ['list'],
     ['html', { outputFolder: 'playwright-report', open: 'never' }],
+    ['junit', { outputFile: 'test-results/results.xml' }],
   ],
 
   timeout: 30_000,
 
   expect: {
     timeout: 5_000,
+  },
+  
+  metadata: {
+    project: 'Playwright Automation Framework',
+    environment: process.env.APP_ENV ?? 'local',
   },
 
   use: {

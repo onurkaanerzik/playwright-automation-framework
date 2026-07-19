@@ -6,7 +6,7 @@ import {
 const profiles: Record<EnvironmentName, EnvironmentConfig> = {
   local: {
     name: 'local',
-    baseUrl: 'https://example.com',
+    baseUrl: 'https://www.saucedemo.com',
     apiBaseUrl: 'https://jsonplaceholder.typicode.com',
     retries: 0,
     workers: undefined,
@@ -19,7 +19,7 @@ const profiles: Record<EnvironmentName, EnvironmentConfig> = {
 
   dev: {
     name: 'dev',
-    baseUrl: 'https://example.com',
+    baseUrl: 'https://www.saucedemo.com',
     apiBaseUrl: 'https://jsonplaceholder.typicode.com',
     retries: 1,
     workers: undefined,
@@ -32,7 +32,7 @@ const profiles: Record<EnvironmentName, EnvironmentConfig> = {
 
   staging: {
     name: 'staging',
-    baseUrl: 'https://example.com',
+    baseUrl: 'https://www.saucedemo.com',
     apiBaseUrl: 'https://jsonplaceholder.typicode.com',
     retries: 1,
     workers: 2,
@@ -45,7 +45,7 @@ const profiles: Record<EnvironmentName, EnvironmentConfig> = {
 
   production: {
     name: 'production',
-    baseUrl: 'https://example.com',
+    baseUrl: 'https://www.saucedemo.com',
     apiBaseUrl: 'https://jsonplaceholder.typicode.com',
     retries: 2,
     workers: 1,
