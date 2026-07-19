@@ -1,4 +1,5 @@
 import { expect, test } from '../../src/fixtures';
+import { type AuthResponse } from '../../src/api/models/booking.model';
 
 test.describe(
   'Authentication API',
@@ -19,7 +20,8 @@ test.describe(
 
         expect(response.status()).toBe(200);
 
-        const body = await response.json();
+        const body =
+          await response.json() as AuthResponse;
 
         expect(body.token).toBeTruthy();
         expect(typeof body.token).toBe('string');

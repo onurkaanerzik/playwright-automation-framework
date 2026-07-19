@@ -1,6 +1,11 @@
 import { expect, test } from '../../src/fixtures';
 import { ApiAssertions } from '../../src/api';
 import { createBooking } from '../../src/data';
+import type {
+  AuthResponse,
+  Booking,
+  CreateBookingResponse,
+} from '../../src/api';
 
 test.describe(
   'Update Booking API',
@@ -23,7 +28,7 @@ test.describe(
         ApiAssertions.expectStatus(createResponse, 200);
 
         const createdBody =
-          await createResponse.json();
+          (await createResponse.json()) as CreateBookingResponse;
 
         const bookingId = createdBody.bookingid;
 
@@ -37,7 +42,7 @@ test.describe(
         ApiAssertions.expectStatus(tokenResponse, 200);
 
         const tokenBody =
-          await tokenResponse.json();
+          (await tokenResponse.json()) as AuthResponse;
 
         // Update booking
         const updatedBooking = createBooking({
@@ -57,7 +62,7 @@ test.describe(
         ApiAssertions.expectSuccess(updateResponse);
 
         const updatedBody =
-          await updateResponse.json();
+          (await updateResponse.json()) as Booking;
 
         expect(updatedBody.firstname).toBe(
           updatedBooking.firstname,

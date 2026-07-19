@@ -1,4 +1,4 @@
-import { Booking } from '../api';
+import { type Booking } from '../api';
 
 export class BookingTestData {
   static default(): Booking {

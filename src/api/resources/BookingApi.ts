@@ -1,6 +1,6 @@
-import { APIResponse } from '@playwright/test';
-import { ApiClient } from '../clients/ApiClient';
-import { Booking } from '../models/booking.model';
+import { type APIResponse } from '@playwright/test';
+import { type ApiClient } from '../clients/ApiClient';
+import { type Booking } from '../models/booking.model';
 
 export class BookingApi {
   constructor(private readonly apiClient: ApiClient) {}

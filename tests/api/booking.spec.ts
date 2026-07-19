@@ -1,6 +1,10 @@
 import { expect, test } from '../../src/fixtures';
 import { ApiAssertions } from '../../src/api';
 import { createBooking } from '../../src/data';
+import type {
+  Booking,
+  CreateBookingResponse,
+} from '../../src/api';
 
 test.describe(
   'Booking API',
@@ -13,65 +17,61 @@ test.describe(
       {
         tag: '@smoke',
       },
-        async ({ bookingApi }) => {
-          const booking =
-            createBooking();
+      async ({ bookingApi }) => {
+        const booking = createBooking();
 
-          const createResponse =
-            await bookingApi.createBooking(
-              booking,
-            );
+        const createResponse =
+          await bookingApi.createBooking(booking);
 
-          ApiAssertions.expectStatus(
-            createResponse,
-            200,
+        ApiAssertions.expectStatus(
+          createResponse,
+          200,
+        );
+
+        const createdBody =
+          (await createResponse.json()) as CreateBookingResponse;
+
+        const bookingId = createdBody.bookingid;
+
+        const response =
+          await bookingApi.getBooking(
+            bookingId,
           );
 
-          const createdBody =
-            await createResponse.json();
+        ApiAssertions.expectStatus(
+          response,
+          200,
+        );
 
-          const bookingId =
-            createdBody.bookingid;
+        ApiAssertions.expectSuccess(response);
+        ApiAssertions.expectJson(response);
 
-          const response =
-            await bookingApi.getBooking(
-              bookingId,
-            );
+        const bookingResponse =
+          (await response.json()) as Booking;
 
-          ApiAssertions.expectStatus(
-            response,
-            200,
-          );
+        expect(
+          bookingResponse.firstname,
+        ).toBeTruthy();
 
-          ApiAssertions.expectSuccess(response);
-          ApiAssertions.expectJson(response);
+        expect(
+          bookingResponse.lastname,
+        ).toBeTruthy();
 
-          const bookingResponse =
-            await response.json();
+        expect(
+          typeof bookingResponse.totalprice,
+        ).toBe('number');
 
-          expect(
-            bookingResponse.firstname,
-          ).toBeTruthy();
+        expect(
+          typeof bookingResponse.depositpaid,
+        ).toBe('boolean');
 
-          expect(
-            bookingResponse.lastname,
-          ).toBeTruthy();
+        expect(
+          bookingResponse.bookingdates.checkin,
+        ).toBeTruthy();
 
-          expect(
-            typeof bookingResponse.totalprice,
-          ).toBe('number');
-
-          expect(
-            typeof bookingResponse.depositpaid,
-          ).toBe('boolean');
-
-          expect(
-            bookingResponse.bookingdates.checkin,
-          ).toBeTruthy();
-
-          expect(
-            bookingResponse.bookingdates.checkout,
-          ).toBeTruthy();
+        expect(
+          bookingResponse.bookingdates.checkout,
+        ).toBeTruthy();
       },
     );
   },

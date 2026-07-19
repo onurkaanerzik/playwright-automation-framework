@@ -2,7 +2,11 @@ import { expect, test } from '../../src/fixtures';
 import { ApiAssertions } from '../../src/api';
 import { createBooking } from '../../src/data';
 import { environment } from '../../src/config';
-import type { AuthResponse, CreateBookingResponse } from '../../src/api';
+import type {
+  AuthResponse,
+  Booking,
+  CreateBookingResponse,
+} from '../../src/api';
 
 test.describe(
   'Patch Booking API',
@@ -24,8 +28,8 @@ test.describe(
 
         ApiAssertions.expectStatus(createResponse, 200);
 
-        const createdBody: CreateBookingResponse =
-          await createResponse.json();
+        const createdBody =
+          (await createResponse.json()) as CreateBookingResponse;
 
         const bookingId = createdBody.bookingid;
 
@@ -38,8 +42,8 @@ test.describe(
 
         ApiAssertions.expectStatus(tokenResponse, 200);
 
-        const tokenBody: AuthResponse =
-          await tokenResponse.json();
+        const tokenBody =
+          (await tokenResponse.json()) as AuthResponse;
 
         const patchResponse =
           await bookingApi.partialUpdateBooking(
@@ -54,7 +58,7 @@ test.describe(
         ApiAssertions.expectSuccess(patchResponse);
 
         const patchedBody =
-          await patchResponse.json();
+          (await patchResponse.json()) as Booking;
 
         expect(patchedBody.firstname).toBe('Onur');
 
@@ -62,7 +66,7 @@ test.describe(
         expect(patchedBody.lastname).toBe(
           booking.lastname,
         );
-    },
+      },
     );
   },
 );

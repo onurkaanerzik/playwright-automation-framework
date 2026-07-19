@@ -1,6 +1,6 @@
 import {
-  APIRequestContext,
-  APIResponse,
+  type APIRequestContext,
+  type APIResponse,
   expect,
 } from '@playwright/test';
 

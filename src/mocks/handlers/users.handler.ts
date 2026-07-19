@@ -1,4 +1,4 @@
-import { Route } from '@playwright/test';
+import { type Route } from '@playwright/test';
 import { mockedUser } from '../data/users.mock';
 
 export const usersMockHandler = async (

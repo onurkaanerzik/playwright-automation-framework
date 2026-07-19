@@ -1,4 +1,4 @@
-import { Booking } from '../../api';
+import { type Booking } from '../../api';
 
 export function createBooking(
   overrides: Partial<Booking> = {},

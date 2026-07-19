@@ -1,6 +1,7 @@
 import { expect, test } from '../../src/fixtures';
 import { ApiAssertions } from '../../src/api';
 import { createBooking } from '../../src/data';
+import { type CreateBookingResponse } from '../../src/api/models/booking.model';
 
 test.describe(
   'Create Booking API',
@@ -22,7 +23,8 @@ test.describe(
         ApiAssertions.expectSuccess(response);
         ApiAssertions.expectJson(response);
 
-        const body = await response.json();
+        const body =
+        (await response.json()) as CreateBookingResponse;
 
         expect(body.bookingid).toBeGreaterThan(0);
 

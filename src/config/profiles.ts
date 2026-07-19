@@ -1,6 +1,6 @@
 import {
-  EnvironmentConfig,
-  EnvironmentName,
+  type EnvironmentConfig,
+  type EnvironmentName,
 } from './types';
 
 const profiles: Record<EnvironmentName, EnvironmentConfig> = {

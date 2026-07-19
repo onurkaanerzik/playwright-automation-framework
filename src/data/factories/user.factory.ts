@@ -1,4 +1,4 @@
-import { User } from '../models/user.model';
+import { type User } from '../models/user.model';
 
 const createUniqueValue = (): string => {
   return `${Date.now()}-${Math.floor(Math.random() * 10000)}`;

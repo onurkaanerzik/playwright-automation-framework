@@ -1,8 +1,8 @@
-import { ApiClient } from '../clients/ApiClient';
+import { type ApiClient } from '../clients/ApiClient';
 import {
-  ApiUser,
-  CreateUserRequest,
-  CreateUserResponse,
+  type ApiUser,
+  type CreateUserRequest,
+  type CreateUserResponse,
 } from '../models/user-api.model';
 
 export class UsersApi {

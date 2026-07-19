@@ -1,4 +1,4 @@
-import { APIResponse, expect } from '@playwright/test';
+import { type APIResponse, expect } from '@playwright/test';
 
 export class ApiAssertions {
   static expectStatus(

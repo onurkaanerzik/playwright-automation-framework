@@ -1,4 +1,4 @@
-import { Page } from '@playwright/test';
+import { type Page } from '@playwright/test';
 import { Logger } from '../utils';
 
 export abstract class BasePage {
@@ -53,7 +53,7 @@ export abstract class BasePage {
     return this.page.title();
   }
 
-  async getCurrentUrl(): Promise<string> {
+  getCurrentUrl(): string {
     return this.page.url();
   }
 }

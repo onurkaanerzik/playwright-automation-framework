@@ -1,6 +1,10 @@
 import { test } from '../../src/fixtures';
 import { ApiAssertions } from '../../src/api';
 import { createBooking } from '../../src/data';
+import type {
+  AuthResponse,
+  CreateBookingResponse,
+} from '../../src/api';
 
 test.describe(
   'Delete Booking API',
@@ -23,7 +27,7 @@ test.describe(
         ApiAssertions.expectStatus(createResponse, 200);
 
         const createdBody =
-          await createResponse.json();
+          (await createResponse.json()) as CreateBookingResponse;
 
         const bookingId = createdBody.bookingid;
 
@@ -37,7 +41,7 @@ test.describe(
         ApiAssertions.expectStatus(tokenResponse, 200);
 
         const tokenBody =
-          await tokenResponse.json();
+          (await tokenResponse.json()) as AuthResponse;
 
         // Delete booking
         const deleteResponse =
