@@ -9,9 +9,7 @@ export class BookingApi {
     return this.apiClient.get(`/booking/${id}`);
   }
 
-  async createBooking(
-    booking: Booking,
-  ): Promise<APIResponse> {
+  async createBooking(booking: Booking): Promise<APIResponse> {
     return this.apiClient.post('/booking', {
       data: booking,
       headers: {
@@ -20,11 +18,7 @@ export class BookingApi {
     });
   }
 
-  async updateBooking(
-    bookingId: number,
-    booking: Booking,
-    token: string,
-  ): Promise<APIResponse> {
+  async updateBooking(bookingId: number, booking: Booking, token: string): Promise<APIResponse> {
     return this.apiClient.put(`/booking/${bookingId}`, {
       data: booking,
       headers: {
@@ -48,10 +42,7 @@ export class BookingApi {
     });
   }
 
-  async deleteBooking(
-    bookingId: number,
-    token: string,
-  ): Promise<APIResponse> {
+  async deleteBooking(bookingId: number, token: string): Promise<APIResponse> {
     return this.apiClient.delete(`/booking/${bookingId}`, {
       headers: {
         Cookie: `token=${token}`,

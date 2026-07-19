@@ -1,161 +1,122 @@
 import { test } from '../../src/fixtures';
 
-test.describe(
-  'Purchase Flow',
-  { tag: ['@ui', '@regression'] },
-  () => {
-    test(
-      'should complete a product purchase successfully',
-      async ({
-        inventoryPage,
-        cartPage,
-        checkoutStepOnePage,
-        checkoutStepTwoPage,
-        checkoutCompletePage,
-        products,
-        customer,
-      }) => {
-        const productName = products.backpack.name;
+test.describe('Purchase Flow', { tag: ['@ui', '@regression'] }, () => {
+  test('should complete a product purchase successfully', async ({
+    inventoryPage,
+    cartPage,
+    checkoutStepOnePage,
+    checkoutStepTwoPage,
+    checkoutCompletePage,
+    products,
+    customer,
+  }) => {
+    const productName = products.backpack.name;
 
-        await test.step(
-          'Verify authenticated user session',
-          async () => {
-            await inventoryPage.open();
-            await inventoryPage.verifyPageLoaded();
-          },
-        );
+    await test.step('Verify authenticated user session', async () => {
+      await inventoryPage.open();
+      await inventoryPage.verifyPageLoaded();
+    });
 
-        await test.step(
-          'Add the product to the shopping cart',
-          async () => {
-            await inventoryPage.addProductToCart(
-              productName,
-            );
+    await test.step('Add the product to the shopping cart', async () => {
+      await inventoryPage.addProductToCart(productName);
 
-            await inventoryPage.verifyCartItemCount(1);
+      await inventoryPage.verifyCartItemCount(1);
 
-            await inventoryPage.openCart();
+      await inventoryPage.openCart();
 
-            await cartPage.verifyPageLoaded();
+      await cartPage.verifyPageLoaded();
 
-            await cartPage.verifyProductExists(
-              productName,
-            );
-          },
-        );
+      await cartPage.verifyProductExists(productName);
+    });
 
-        await test.step(
-          'Enter checkout information',
-          async () => {
-            await cartPage.proceedToCheckout();
+    await test.step('Enter checkout information', async () => {
+      await cartPage.proceedToCheckout();
 
-            await checkoutStepOnePage.verifyPageLoaded();
+      await checkoutStepOnePage.verifyPageLoaded();
 
-            await checkoutStepOnePage.fillCustomerInformation(
-              customer.firstName,
-              customer.lastName,
-              customer.postalCode,
-            );
+      await checkoutStepOnePage.fillCustomerInformation(
+        customer.firstName,
+        customer.lastName,
+        customer.postalCode,
+      );
 
-            await checkoutStepOnePage.continueCheckout();
-          },
-        );
+      await checkoutStepOnePage.continueCheckout();
+    });
 
-        await test.step(
-          'Review and finish the order',
-          async () => {
-            await checkoutStepTwoPage.verifyPageLoaded();
+    await test.step('Review and finish the order', async () => {
+      await checkoutStepTwoPage.verifyPageLoaded();
 
-            await checkoutStepTwoPage.verifyProductExists(
-              productName,
-            );
+      await checkoutStepTwoPage.verifyProductExists(productName);
 
-            await checkoutStepTwoPage.verifyPriceSummaryVisible();
+      await checkoutStepTwoPage.verifyPriceSummaryVisible();
 
-            await checkoutStepTwoPage.finishCheckout();
-          },
-        );
+      await checkoutStepTwoPage.finishCheckout();
+    });
 
-        await test.step(
-          'Verify the order was completed',
-          async () => {
-            await checkoutCompletePage.verifyPageLoaded();
+    await test.step('Verify the order was completed', async () => {
+      await checkoutCompletePage.verifyPageLoaded();
 
-            await checkoutCompletePage.verifyOrderCompleted();
-          },
-        );
-      },
+      await checkoutCompletePage.verifyOrderCompleted();
+    });
+  });
+
+  test('should complete a multi-product purchase successfully', async ({
+    inventoryPage,
+    cartPage,
+    checkoutStepOnePage,
+    checkoutStepTwoPage,
+    checkoutCompletePage,
+    products,
+    customer,
+  }) => {
+    const selectedProducts = [
+      products.backpack.name,
+      products.bikeLight.name,
+      products.onesie.name,
+    ];
+
+    await inventoryPage.open();
+
+    await inventoryPage.verifyPageLoaded();
+
+    for (const productName of selectedProducts) {
+      await inventoryPage.addProductToCart(productName);
+    }
+
+    await inventoryPage.verifyCartItemCount(selectedProducts.length);
+
+    await inventoryPage.openCart();
+
+    await cartPage.verifyPageLoaded();
+
+    for (const productName of selectedProducts) {
+      await cartPage.verifyProductExists(productName);
+    }
+
+    await cartPage.proceedToCheckout();
+
+    await checkoutStepOnePage.verifyPageLoaded();
+
+    await checkoutStepOnePage.fillCustomerInformation(
+      customer.firstName,
+      customer.lastName,
+      customer.postalCode,
     );
 
-    test(
-      'should complete a multi-product purchase successfully',
-      async ({
-        inventoryPage,
-        cartPage,
-        checkoutStepOnePage,
-        checkoutStepTwoPage,
-        checkoutCompletePage,
-        products,
-        customer,
-      }) => {
-        const selectedProducts = [
-          products.backpack.name,
-          products.bikeLight.name,
-          products.onesie.name,
-        ];
+    await checkoutStepOnePage.continueCheckout();
 
-        await inventoryPage.open();
+    await checkoutStepTwoPage.verifyPageLoaded();
 
-        await inventoryPage.verifyPageLoaded();
+    for (const productName of selectedProducts) {
+      await checkoutStepTwoPage.verifyProductExists(productName);
+    }
 
-        for (const productName of selectedProducts) {
-          await inventoryPage.addProductToCart(
-            productName,
-          );
-        }
+    await checkoutStepTwoPage.verifyPriceSummaryVisible();
 
-        await inventoryPage.verifyCartItemCount(
-          selectedProducts.length,
-        );
+    await checkoutStepTwoPage.finishCheckout();
 
-        await inventoryPage.openCart();
+    await checkoutCompletePage.verifyPageLoaded();
 
-        await cartPage.verifyPageLoaded();
-
-        for (const productName of selectedProducts) {
-          await cartPage.verifyProductExists(
-            productName,
-          );
-        }
-
-        await cartPage.proceedToCheckout();
-
-        await checkoutStepOnePage.verifyPageLoaded();
-
-        await checkoutStepOnePage.fillCustomerInformation(
-          customer.firstName,
-          customer.lastName,
-          customer.postalCode,
-        );
-
-        await checkoutStepOnePage.continueCheckout();
-
-        await checkoutStepTwoPage.verifyPageLoaded();
-
-        for (const productName of selectedProducts) {
-          await checkoutStepTwoPage.verifyProductExists(
-            productName,
-          );
-        }
-
-        await checkoutStepTwoPage.verifyPriceSummaryVisible();
-
-        await checkoutStepTwoPage.finishCheckout();
-
-        await checkoutCompletePage.verifyPageLoaded();
-
-        await checkoutCompletePage.verifyOrderCompleted();
-      },
-    );
-  },
-);
+    await checkoutCompletePage.verifyOrderCompleted();
+  });
+});

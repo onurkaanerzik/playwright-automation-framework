@@ -1,37 +1,23 @@
 import { test } from '../../src/fixtures';
 
-test.describe(
-  'Inventory',
-  { tag: ['@ui', '@regression'] },
-  () => {
-    test(
-      'should sort products by name ascending',
-      async ({
-        inventoryPage,
-      }) => {
-        await inventoryPage.open();
+test.describe('Inventory', { tag: ['@ui', '@regression'] }, () => {
+  test('should sort products by name ascending', async ({ inventoryPage }) => {
+    await inventoryPage.open();
 
-        await inventoryPage.verifyPageLoaded();
+    await inventoryPage.verifyPageLoaded();
 
-        await inventoryPage.sortProducts('az');
+    await inventoryPage.sortProducts('az');
 
-        await inventoryPage.verifyProductsSortedByNameAscending();
-      },
-    );
+    await inventoryPage.verifyProductsSortedByNameAscending();
+  });
 
-    test(
-      'should sort products by price descending',
-      async ({
-        inventoryPage,
-      }) => {
-        await inventoryPage.open();
+  test('should sort products by price descending', async ({ inventoryPage }) => {
+    await inventoryPage.open();
 
-        await inventoryPage.verifyPageLoaded();
+    await inventoryPage.verifyPageLoaded();
 
-        await inventoryPage.sortProducts('hilo');
+    await inventoryPage.sortProducts('hilo');
 
-        await inventoryPage.verifyProductsSortedByPriceDescending();
-      },
-    );
-  },
-);
+    await inventoryPage.verifyProductsSortedByPriceDescending();
+  });
+});

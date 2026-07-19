@@ -20,8 +20,7 @@ test.describe(
 
         expect(response.status()).toBe(200);
 
-        const body =
-          await response.json() as AuthResponse;
+        const body = (await response.json()) as AuthResponse;
 
         expect(body.token).toBeTruthy();
         expect(typeof body.token).toBe('string');

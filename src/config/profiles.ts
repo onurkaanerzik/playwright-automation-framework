@@ -1,7 +1,4 @@
-import {
-  type EnvironmentConfig,
-  type EnvironmentName,
-} from './types';
+import { type EnvironmentConfig, type EnvironmentName } from './types';
 
 const profiles: Record<EnvironmentName, EnvironmentConfig> = {
   local: {
@@ -57,8 +54,6 @@ const profiles: Record<EnvironmentName, EnvironmentConfig> = {
   },
 };
 
-export const getEnvironmentProfile = (
-  environmentName: EnvironmentName,
-): EnvironmentConfig => {
+export const getEnvironmentProfile = (environmentName: EnvironmentName): EnvironmentConfig => {
   return profiles[environmentName];
 };

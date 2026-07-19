@@ -22,32 +22,22 @@ export class InventoryPage extends BasePage {
       exact: true,
     });
 
-    this.shoppingCartLink = page.locator(
-      '[data-test="shopping-cart-link"]',
-    );
+    this.shoppingCartLink = page.locator('[data-test="shopping-cart-link"]');
 
-    this.cartBadge = page.locator(
-      '[data-test="shopping-cart-badge"]',
-    );
+    this.cartBadge = page.locator('[data-test="shopping-cart-badge"]');
 
-    this.sortDropdown = page.locator(
-      '[data-test="product-sort-container"]',
-    );
+    this.sortDropdown = page.locator('[data-test="product-sort-container"]');
 
-    this.productNames = page.locator(
-      '[data-test="inventory-item-name"]',
-    );
+    this.productNames = page.locator('[data-test="inventory-item-name"]');
 
-    this.productPrices = page.locator(
-      '[data-test="inventory-item-price"]',
-    );
+    this.productPrices = page.locator('[data-test="inventory-item-price"]');
   }
   async open(): Promise<void> {
     Logger.info('Opening inventory page');
 
     await this.navigate('/inventory.html');
   }
-  
+
   async verifyPageLoaded(): Promise<void> {
     Logger.info('Verifying inventory page is loaded');
 
@@ -56,58 +46,38 @@ export class InventoryPage extends BasePage {
     await expect(this.appLogo).toBeVisible();
   }
 
-  async verifyCartItemCount(
-    expectedCount: number,
-  ): Promise<void> {
-    Logger.info(
-      `Verifying cart item count: ${expectedCount}`,
-    );
+  async verifyCartItemCount(expectedCount: number): Promise<void> {
+    Logger.info(`Verifying cart item count: ${expectedCount}`);
 
-    await expect(this.cartBadge).toHaveText(
-      expectedCount.toString(),
-    );
+    await expect(this.cartBadge).toHaveText(expectedCount.toString());
   }
 
-  async sortProducts(
-    option: 'az' | 'za' | 'lohi' | 'hilo',
-  ): Promise<void> {
+  async sortProducts(option: 'az' | 'za' | 'lohi' | 'hilo'): Promise<void> {
     Logger.info(`Sorting products by "${option}"`);
 
     await this.sortDropdown.selectOption(option);
   }
 
   async verifyProductsSortedByNameAscending(): Promise<void> {
-    const actualNames =
-      await this.productNames.allTextContents();
+    const actualNames = await this.productNames.allTextContents();
 
-    const expectedNames = [...actualNames].sort(
-      (first, second) =>
-        first.localeCompare(second),
-    );
+    const expectedNames = [...actualNames].sort((first, second) => first.localeCompare(second));
 
     expect(actualNames).toEqual(expectedNames);
   }
 
   async verifyProductsSortedByPriceDescending(): Promise<void> {
-    const actualPrices = (
-      await this.productPrices.allTextContents()
-    ).map((price) =>
+    const actualPrices = (await this.productPrices.allTextContents()).map((price) =>
       Number.parseFloat(price.replace('$', '')),
     );
 
-    const expectedPrices = [...actualPrices].sort(
-      (first, second) => second - first,
-    );
+    const expectedPrices = [...actualPrices].sort((first, second) => second - first);
 
     expect(actualPrices).toEqual(expectedPrices);
   }
 
-  async addProductToCart(
-    productName: string,
-  ): Promise<void> {
-    Logger.info(
-      `Adding product to cart: "${productName}"`,
-    );
+  async addProductToCart(productName: string): Promise<void> {
+    Logger.info(`Adding product to cart: "${productName}"`);
 
     await this.page
       .locator('.inventory_item')

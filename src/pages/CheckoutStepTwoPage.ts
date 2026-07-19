@@ -14,32 +14,19 @@ export class CheckoutStepTwoPage extends BasePage {
   constructor(page: Page) {
     super(page);
 
-    this.pageTitle = page.getByText(
-      'Checkout: Overview',
-      {
-        exact: true,
-      },
-    );
+    this.pageTitle = page.getByText('Checkout: Overview', {
+      exact: true,
+    });
 
-    this.finishButton = page.locator(
-      '[data-test="finish"]',
-    );
+    this.finishButton = page.locator('[data-test="finish"]');
 
-    this.cancelButton = page.locator(
-      '[data-test="cancel"]',
-    );
+    this.cancelButton = page.locator('[data-test="cancel"]');
 
-    this.itemTotal = page.locator(
-      '[data-test="subtotal-label"]',
-    );
+    this.itemTotal = page.locator('[data-test="subtotal-label"]');
 
-    this.tax = page.locator(
-      '[data-test="tax-label"]',
-    );
+    this.tax = page.locator('[data-test="tax-label"]');
 
-    this.total = page.locator(
-      '[data-test="total-label"]',
-    );
+    this.total = page.locator('[data-test="total-label"]');
   }
 
   // Business Actions
@@ -57,27 +44,17 @@ export class CheckoutStepTwoPage extends BasePage {
 
   // Verification Methods
   async verifyPageLoaded(): Promise<void> {
-    Logger.info(
-      'Verifying checkout overview page is loaded',
-    );
+    Logger.info('Verifying checkout overview page is loaded');
 
-    await expect(this.page).toHaveURL(
-      /checkout-step-two\.html/,
-    );
+    await expect(this.page).toHaveURL(/checkout-step-two\.html/);
 
     await expect(this.pageTitle).toBeVisible();
   }
 
-  async verifyProductExists(
-    productName: string,
-  ): Promise<void> {
-    Logger.info(
-      `Verifying checkout product exists: "${productName}"`,
-    );
+  async verifyProductExists(productName: string): Promise<void> {
+    Logger.info(`Verifying checkout product exists: "${productName}"`);
 
-    await expect(
-      this.getCheckoutItem(productName),
-    ).toBeVisible();
+    await expect(this.getCheckoutItem(productName)).toBeVisible();
   }
 
   async verifyPriceSummaryVisible(): Promise<void> {
@@ -88,52 +65,30 @@ export class CheckoutStepTwoPage extends BasePage {
     await expect(this.total).toBeVisible();
   }
 
-  async verifyItemTotal(
-    expectedValue: string,
-  ): Promise<void> {
-    Logger.info(
-      `Verifying item total: "${expectedValue}"`,
-    );
+  async verifyItemTotal(expectedValue: string): Promise<void> {
+    Logger.info(`Verifying item total: "${expectedValue}"`);
 
-    await expect(this.itemTotal).toContainText(
-      expectedValue,
-    );
+    await expect(this.itemTotal).toContainText(expectedValue);
   }
 
-  async verifyTax(
-    expectedValue: string,
-  ): Promise<void> {
-    Logger.info(
-      `Verifying tax: "${expectedValue}"`,
-    );
+  async verifyTax(expectedValue: string): Promise<void> {
+    Logger.info(`Verifying tax: "${expectedValue}"`);
 
-    await expect(this.tax).toContainText(
-      expectedValue,
-    );
+    await expect(this.tax).toContainText(expectedValue);
   }
 
-  async verifyTotal(
-    expectedValue: string,
-  ): Promise<void> {
-    Logger.info(
-      `Verifying total: "${expectedValue}"`,
-    );
+  async verifyTotal(expectedValue: string): Promise<void> {
+    Logger.info(`Verifying total: "${expectedValue}"`);
 
-    await expect(this.total).toContainText(
-      expectedValue,
-    );
+    await expect(this.total).toContainText(expectedValue);
   }
 
   // Private Helpers
-  private getCheckoutItem(
-    productName: string,
-  ): Locator {
-    return this.page
-      .locator('.cart_item')
-      .filter({
-        has: this.page.getByText(productName, {
-          exact: true,
-        }),
-      });
+  private getCheckoutItem(productName: string): Locator {
+    return this.page.locator('.cart_item').filter({
+      has: this.page.getByText(productName, {
+        exact: true,
+      }),
+    });
   }
 }

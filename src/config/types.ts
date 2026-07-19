@@ -1,8 +1,4 @@
-export type EnvironmentName =
-  | 'local'
-  | 'dev'
-  | 'staging'
-  | 'production';
+export type EnvironmentName = 'local' | 'dev' | 'staging' | 'production';
 
 export type EnvironmentConfig = {
   name: EnvironmentName;

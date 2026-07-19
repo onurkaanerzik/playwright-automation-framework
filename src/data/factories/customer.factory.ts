@@ -4,9 +4,7 @@ export interface Customer {
   postalCode: string;
 }
 
-export function createCustomer(
-  overrides: Partial<Customer> = {},
-): Customer {
+export function createCustomer(overrides: Partial<Customer> = {}): Customer {
   return {
     firstName: 'Onur',
     lastName: 'Erzik',

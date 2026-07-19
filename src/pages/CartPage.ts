@@ -15,22 +15,14 @@ export class CartPage extends BasePage {
       exact: true,
     });
 
-    this.checkoutButton = page.locator(
-      '[data-test="checkout"]',
-    );
+    this.checkoutButton = page.locator('[data-test="checkout"]');
 
-    this.continueShoppingButton = page.locator(
-      '[data-test="continue-shopping"]',
-    );
+    this.continueShoppingButton = page.locator('[data-test="continue-shopping"]');
   }
 
   // Business Actions
-  async removeProduct(
-    productName: string,
-  ): Promise<void> {
-    Logger.info(
-      `Removing product from cart: "${productName}"`,
-    );
+  async removeProduct(productName: string): Promise<void> {
+    Logger.info(`Removing product from cart: "${productName}"`);
 
     await this.getCartItem(productName)
       .getByRole('button', {
@@ -59,40 +51,24 @@ export class CartPage extends BasePage {
     await expect(this.pageTitle).toBeVisible();
   }
 
-  async verifyProductExists(
-    productName: string,
-  ): Promise<void> {
-    Logger.info(
-      `Verifying product exists: "${productName}"`,
-    );
+  async verifyProductExists(productName: string): Promise<void> {
+    Logger.info(`Verifying product exists: "${productName}"`);
 
-    await expect(
-      this.getCartItem(productName),
-    ).toBeVisible();
+    await expect(this.getCartItem(productName)).toBeVisible();
   }
 
-  async verifyProductDoesNotExist(
-    productName: string,
-  ): Promise<void> {
-    Logger.info(
-      `Verifying product does not exist: "${productName}"`,
-    );
+  async verifyProductDoesNotExist(productName: string): Promise<void> {
+    Logger.info(`Verifying product does not exist: "${productName}"`);
 
-    await expect(
-      this.getCartItem(productName),
-    ).toHaveCount(0);
+    await expect(this.getCartItem(productName)).toHaveCount(0);
   }
 
   // Private Helpers
-  private getCartItem(
-    productName: string,
-  ): Locator {
-    return this.page
-      .locator('.cart_item')
-      .filter({
-        has: this.page.getByText(productName, {
-          exact: true,
-        }),
-      });
+  private getCartItem(productName: string): Locator {
+    return this.page.locator('.cart_item').filter({
+      has: this.page.getByText(productName, {
+        exact: true,
+      }),
+    });
   }
 }

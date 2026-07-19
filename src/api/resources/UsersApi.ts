@@ -24,9 +24,7 @@ export class UsersApi {
     return this.apiClient.parseJson<ApiUser>(response);
   }
 
-  async createUser(
-    user: CreateUserRequest,
-  ): Promise<CreateUserResponse> {
+  async createUser(user: CreateUserRequest): Promise<CreateUserResponse> {
     const response = await this.apiClient.post('/users', {
       data: user,
       headers: {

@@ -4,11 +4,7 @@ export { BookingApi } from './resources/BookingApi';
 export { AuthApi } from './resources/AuthApi';
 export { ApiAssertions } from './assertions/ApiAssertions';
 
-export type {
-  ApiUser,
-  CreateUserRequest,
-  CreateUserResponse,
-} from './models/user-api.model';
+export type { ApiUser, CreateUserRequest, CreateUserResponse } from './models/user-api.model';
 
 export type {
   Booking,

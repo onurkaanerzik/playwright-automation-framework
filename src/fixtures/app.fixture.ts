@@ -1,11 +1,6 @@
 import { expect, test as base } from '@playwright/test';
 import { products } from '../data/products';
-import {
-  ApiClient,
-  AuthApi,
-  BookingApi,
-  UsersApi,
-} from '../api';
+import { ApiClient, AuthApi, BookingApi, UsersApi } from '../api';
 import { environment } from '../config/environment';
 import {
   CartPage,
@@ -65,49 +60,37 @@ export const test = base.extend<AppFixtures>({
   },
 
   checkoutStepOnePage: async ({ page }, use) => {
-    const checkoutStepOnePage =
-      new CheckoutStepOnePage(page);
+    const checkoutStepOnePage = new CheckoutStepOnePage(page);
 
     await use(checkoutStepOnePage);
   },
 
   checkoutStepTwoPage: async ({ page }, use) => {
-    const checkoutStepTwoPage =
-      new CheckoutStepTwoPage(page);
+    const checkoutStepTwoPage = new CheckoutStepTwoPage(page);
 
     await use(checkoutStepTwoPage);
   },
 
   checkoutCompletePage: async ({ page }, use) => {
-    const checkoutCompletePage =
-      new CheckoutCompletePage(page);
+    const checkoutCompletePage = new CheckoutCompletePage(page);
 
     await use(checkoutCompletePage);
   },
 
   usersApi: async ({ request }, use) => {
-    const apiClient = new ApiClient(
-      request,
-      environment.apiBaseUrl,
-    );
+    const apiClient = new ApiClient(request, environment.apiBaseUrl);
 
     await use(new UsersApi(apiClient));
   },
 
   bookingApi: async ({ request }, use) => {
-    const apiClient = new ApiClient(
-      request,
-      'https://restful-booker.herokuapp.com',
-    );
+    const apiClient = new ApiClient(request, 'https://restful-booker.herokuapp.com');
 
     await use(new BookingApi(apiClient));
   },
 
   authApi: async ({ request }, use) => {
-    const apiClient = new ApiClient(
-      request,
-      'https://restful-booker.herokuapp.com',
-    );
+    const apiClient = new ApiClient(request, 'https://restful-booker.herokuapp.com');
 
     await use(new AuthApi(apiClient));
   },

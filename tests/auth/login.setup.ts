@@ -2,29 +2,22 @@ import { expect, test as setup } from '@playwright/test';
 
 const authFile = '.auth/user.json';
 
-setup(
-  'authenticate user',
-  async ({ page }) => {
-    await page.goto('/');
+setup('authenticate user', async ({ page }) => {
+  await page.goto('/');
 
-    await page.getByPlaceholder('Username').fill(
-      'standard_user',
-    );
+  await page.getByPlaceholder('Username').fill('standard_user');
 
-    await page.getByPlaceholder('Password').fill(
-      'secret_sauce',
-    );
+  await page.getByPlaceholder('Password').fill('secret_sauce');
 
-    await page.getByRole('button', {
+  await page
+    .getByRole('button', {
       name: 'Login',
-    }).click();
+    })
+    .click();
 
-    await expect(page).toHaveURL(
-      /inventory\.html/,
-    );
+  await expect(page).toHaveURL(/inventory\.html/);
 
-    await page.context().storageState({
-      path: authFile,
-    });
-  },
-);
+  await page.context().storageState({
+    path: authFile,
+  });
+});

@@ -15,36 +15,21 @@ export class CheckoutStepOnePage extends BasePage {
   constructor(page: Page) {
     super(page);
 
-    this.pageTitle = page.getByText(
-      'Checkout: Your Information',
-      {
-        exact: true,
-      },
-    );
+    this.pageTitle = page.getByText('Checkout: Your Information', {
+      exact: true,
+    });
 
-    this.firstNameInput = page.locator(
-      '[data-test="firstName"]',
-    );
+    this.firstNameInput = page.locator('[data-test="firstName"]');
 
-    this.lastNameInput = page.locator(
-      '[data-test="lastName"]',
-    );
+    this.lastNameInput = page.locator('[data-test="lastName"]');
 
-    this.postalCodeInput = page.locator(
-      '[data-test="postalCode"]',
-    );
+    this.postalCodeInput = page.locator('[data-test="postalCode"]');
 
-    this.continueButton = page.locator(
-      '[data-test="continue"]',
-    );
+    this.continueButton = page.locator('[data-test="continue"]');
 
-    this.cancelButton = page.locator(
-      '[data-test="cancel"]',
-    );
+    this.cancelButton = page.locator('[data-test="cancel"]');
 
-    this.errorMessage = page.locator(
-      '[data-test="error"]',
-    );
+    this.errorMessage = page.locator('[data-test="error"]');
   }
 
   // Business Actions
@@ -74,27 +59,17 @@ export class CheckoutStepOnePage extends BasePage {
 
   // Verification Methods
   async verifyPageLoaded(): Promise<void> {
-    Logger.info(
-      'Verifying checkout information page is loaded',
-    );
+    Logger.info('Verifying checkout information page is loaded');
 
-    await expect(this.page).toHaveURL(
-      /checkout-step-one\.html/,
-    );
+    await expect(this.page).toHaveURL(/checkout-step-one\.html/);
 
     await expect(this.pageTitle).toBeVisible();
   }
 
-  async verifyValidationMessage(
-    expectedMessage: string,
-  ): Promise<void> {
-    Logger.info(
-      `Verifying validation message: "${expectedMessage}"`,
-    );
+  async verifyValidationMessage(expectedMessage: string): Promise<void> {
+    Logger.info(`Verifying validation message: "${expectedMessage}"`);
 
     await expect(this.errorMessage).toBeVisible();
-    await expect(this.errorMessage).toContainText(
-      expectedMessage,
-    );
+    await expect(this.errorMessage).toContainText(expectedMessage);
   }
 }

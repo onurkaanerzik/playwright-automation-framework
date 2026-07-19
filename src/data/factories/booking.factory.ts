@@ -1,8 +1,6 @@
 import { type Booking } from '../../api';
 
-export function createBooking(
-  overrides: Partial<Booking> = {},
-): Booking {
+export function createBooking(overrides: Partial<Booking> = {}): Booking {
   return {
     firstname: 'Onur',
     lastname: 'Erzik',

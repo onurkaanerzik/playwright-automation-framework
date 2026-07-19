@@ -11,23 +11,15 @@ export class CheckoutCompletePage extends BasePage {
   constructor(page: Page) {
     super(page);
 
-    this.pageTitle = page.getByText(
-      'Checkout: Complete!',
-      {
-        exact: true,
-      },
-    );
+    this.pageTitle = page.getByText('Checkout: Complete!', {
+      exact: true,
+    });
 
-    this.successMessage = page.getByText(
-      'Thank you for your order!',
-      {
-        exact: true,
-      },
-    );
+    this.successMessage = page.getByText('Thank you for your order!', {
+      exact: true,
+    });
 
-    this.backHomeButton = page.locator(
-      '[data-test="back-to-products"]',
-    );
+    this.backHomeButton = page.locator('[data-test="back-to-products"]');
   }
 
   // Business Actions
@@ -39,13 +31,9 @@ export class CheckoutCompletePage extends BasePage {
 
   // Verification Methods
   async verifyPageLoaded(): Promise<void> {
-    Logger.info(
-      'Verifying checkout complete page is loaded',
-    );
+    Logger.info('Verifying checkout complete page is loaded');
 
-    await expect(this.page).toHaveURL(
-      /checkout-complete\.html/,
-    );
+    await expect(this.page).toHaveURL(/checkout-complete\.html/);
 
     await expect(this.pageTitle).toBeVisible();
   }

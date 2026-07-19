@@ -25,17 +25,17 @@ The framework is intentionally structured to resemble automation frameworks comm
 
 # 🛠 Technology Stack
 
-| Category | Technology |
-|-----------|------------|
-| Language | TypeScript |
-| Automation | Playwright |
-| Runtime | Node.js |
-| Package Manager | npm |
-| Environment Management | dotenv |
-| Version Control | Git & GitHub |
-| Code Quality | ESLint + TypeScript |
-| Reporting | HTML + List + JUnit Reporters |
-| CI/CD | GitHub Actions |
+| Category               | Technology                    |
+| ---------------------- | ----------------------------- |
+| Language               | TypeScript                    |
+| Automation             | Playwright                    |
+| Runtime                | Node.js                       |
+| Package Manager        | npm                           |
+| Environment Management | dotenv                        |
+| Version Control        | Git & GitHub                  |
+| Code Quality           | ESLint + TypeScript           |
+| Reporting              | HTML + List + JUnit Reporters |
+| CI/CD                  | GitHub Actions                |
 
 ---
 
@@ -195,7 +195,9 @@ The framework follows modern software engineering principles:
 - Reusability
 - Type Safety
 - Clean Code Practices
+
 ---
+
 ---
 
 # 🚀 Getting Started
@@ -427,13 +429,13 @@ npm run report
 
 The framework is organized into multiple Playwright projects.
 
-| Project | Purpose |
-|----------|---------|
-| setup | Generates authentication state |
-| api | Executes API automation tests |
-| chromium | Executes UI tests on Chromium |
-| firefox | Executes UI tests on Firefox |
-| webkit | Executes UI tests on WebKit |
+| Project  | Purpose                        |
+| -------- | ------------------------------ |
+| setup    | Generates authentication state |
+| api      | Executes API automation tests  |
+| chromium | Executes UI tests on Chromium  |
+| firefox  | Executes UI tests on Firefox   |
+| webkit   | Executes UI tests on WebKit    |
 
 The browser projects depend on the `setup` project and automatically reuse the generated authentication state.
 

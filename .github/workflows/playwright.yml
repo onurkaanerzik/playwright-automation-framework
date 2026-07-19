@@ -43,6 +43,9 @@ jobs:
       - name: Run ESLint
         run: npm run lint
 
+      - name: Check code formatting
+        run: npm run format:check
+
   test:
     name: Playwright Tests
     needs: quality
@@ -85,3 +88,18 @@ jobs:
           path: test-results/
           retention-days: 30
           if-no-files-found: ignore
+
+      - name: Publish test summary
+        if: ${{ always() }}
+        run: |
+          echo "## Playwright Test Summary" >> "$GITHUB_STEP_SUMMARY"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          echo "| Item | Details |" >> "$GITHUB_STEP_SUMMARY"
+          echo "|---|---|" >> "$GITHUB_STEP_SUMMARY"
+          echo "| Workflow | ${{ github.workflow }} |" >> "$GITHUB_STEP_SUMMARY"
+          echo "| Branch | ${{ github.ref_name }} |" >> "$GITHUB_STEP_SUMMARY"
+          echo "| Commit | \`${{ github.sha }}\` |" >> "$GITHUB_STEP_SUMMARY"
+          echo "| Trigger | ${{ github.event_name }} |" >> "$GITHUB_STEP_SUMMARY"
+          echo "| Environment | local |" >> "$GITHUB_STEP_SUMMARY"
+          echo "| Playwright report | Uploaded as artifact |" >> "$GITHUB_STEP_SUMMARY"
+          echo "| Test results | Uploaded as artifact |" >> "$GITHUB_STEP_SUMMARY"

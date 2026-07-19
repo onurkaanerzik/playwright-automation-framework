@@ -1,8 +1,4 @@
-import {
-  type APIRequestContext,
-  type APIResponse,
-  expect,
-} from '@playwright/test';
+import { type APIRequestContext, type APIResponse, expect } from '@playwright/test';
 
 type RequestOptions = {
   headers?: Record<string, string>;
@@ -19,20 +15,14 @@ export class ApiClient {
     private readonly baseUrl: string,
   ) {}
 
-  async get(
-    path: string,
-    options: RequestOptions = {},
-  ): Promise<APIResponse> {
+  async get(path: string, options: RequestOptions = {}): Promise<APIResponse> {
     return this.request.get(this.buildUrl(path), {
       headers: options.headers,
       params: options.query,
     });
   }
 
-  async post<TBody>(
-    path: string,
-    options: BodyRequestOptions<TBody>,
-  ): Promise<APIResponse> {
+  async post<TBody>(path: string, options: BodyRequestOptions<TBody>): Promise<APIResponse> {
     return this.request.post(this.buildUrl(path), {
       data: options.data,
       headers: options.headers,
@@ -40,10 +30,7 @@ export class ApiClient {
     });
   }
 
-  async put<TBody>(
-    path: string,
-    options: BodyRequestOptions<TBody>,
-  ): Promise<APIResponse> {
+  async put<TBody>(path: string, options: BodyRequestOptions<TBody>): Promise<APIResponse> {
     return this.request.put(this.buildUrl(path), {
       data: options.data,
       headers: options.headers,
@@ -51,10 +38,7 @@ export class ApiClient {
     });
   }
 
-  async patch<TBody>(
-    path: string,
-    options: BodyRequestOptions<TBody>,
-  ): Promise<APIResponse> {
+  async patch<TBody>(path: string, options: BodyRequestOptions<TBody>): Promise<APIResponse> {
     return this.request.patch(this.buildUrl(path), {
       data: options.data,
       headers: options.headers,
@@ -62,36 +46,27 @@ export class ApiClient {
     });
   }
 
-  async delete(
-    path: string,
-    options: RequestOptions = {},
-  ): Promise<APIResponse> {
+  async delete(path: string, options: RequestOptions = {}): Promise<APIResponse> {
     return this.request.delete(this.buildUrl(path), {
       headers: options.headers,
       params: options.query,
     });
   }
 
-  async expectSuccessfulResponse(
-    response: APIResponse,
-  ): Promise<void> {
+  async expectSuccessfulResponse(response: APIResponse): Promise<void> {
     await expect(
       response,
       `Expected a successful API response but received ${response.status()}`,
     ).toBeOK();
   }
 
-  async parseJson<TResponse>(
-    response: APIResponse,
-  ): Promise<TResponse> {
+  async parseJson<TResponse>(response: APIResponse): Promise<TResponse> {
     return response.json() as Promise<TResponse>;
   }
 
   private buildUrl(path: string): string {
     const normalizedBaseUrl = this.baseUrl.replace(/\/$/, '');
-    const normalizedPath = path.startsWith('/')
-      ? path
-      : `/${path}`;
+    const normalizedPath = path.startsWith('/') ? path : `/${path}`;
 
     return `${normalizedBaseUrl}${normalizedPath}`;
   }

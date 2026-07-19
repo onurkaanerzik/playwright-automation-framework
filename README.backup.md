@@ -23,16 +23,16 @@ The framework is designed with real-world QA automation practices in mind.
 
 # 🛠 Technology Stack
 
-| Category | Technology |
-|---|---|
-| Language | TypeScript |
-| Automation | Playwright |
-| Runtime | Node.js |
-| Package Manager | npm |
-| Version Control | Git & GitHub |
-| CI/CD | GitHub Actions |
-| Code Quality | TypeScript + Prettier |
-| Reporting | Playwright HTML Report |
+| Category        | Technology             |
+| --------------- | ---------------------- |
+| Language        | TypeScript             |
+| Automation      | Playwright             |
+| Runtime         | Node.js                |
+| Package Manager | npm                    |
+| Version Control | Git & GitHub           |
+| CI/CD           | GitHub Actions         |
+| Code Quality    | TypeScript + Prettier  |
+| Reporting       | Playwright HTML Report |
 
 ---
 
@@ -95,8 +95,7 @@ tests/
 ✔ Reusable locators  
 ✔ Business-level page actions  
 ✔ Cross-browser execution  
-✔ Parallel test execution  
-
+✔ Parallel test execution
 
 ## API Automation
 
@@ -104,8 +103,7 @@ tests/
 ✔ Resource-based API structure  
 ✔ CRUD API testing  
 ✔ Type-safe API models  
-✔ API assertion layer  
-
+✔ API assertion layer
 
 ## Test Infrastructure
 
@@ -114,15 +112,14 @@ tests/
 ✔ Environment-based configuration  
 ✔ Test data management  
 ✔ Tag-based execution  
-✔ HTML reporting  
-
+✔ HTML reporting
 
 ## CI/CD
 
 ✔ GitHub Actions integration  
 ✔ Automated test execution  
 ✔ TypeScript validation  
-✔ Test reporting  
+✔ Test reporting
 
 ---
 
@@ -260,7 +257,6 @@ Completed:
 - [x] API Client Layer
 - [x] CI Pipeline
 
-
 ---
 
 ## Sprint 2 — Framework Enhancement 🚧
@@ -271,7 +267,6 @@ Completed:
 - [ ] Advanced Reporting
 - [ ] Better Logging
 
-
 ---
 
 ## Sprint 3 — Advanced Automation
@@ -281,7 +276,6 @@ Completed:
 - [ ] Advanced Fixtures
 - [ ] Performance Testing Examples
 
-
 ---
 
 ## Sprint 4 — CI/CD Improvements
@@ -290,7 +284,6 @@ Completed:
 - [ ] Artifact Management
 - [ ] Docker Support
 - [ ] Pipeline Enhancements
-
 
 ---
 

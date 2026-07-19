@@ -23,23 +23,14 @@ test.describe(
         ApiAssertions.expectSuccess(response);
         ApiAssertions.expectJson(response);
 
-        const body =
-        (await response.json()) as CreateBookingResponse;
+        const body = (await response.json()) as CreateBookingResponse;
 
         expect(body.bookingid).toBeGreaterThan(0);
 
-        expect(body.booking.firstname).toBe(
-          booking.firstname,
-        );
-        expect(body.booking.lastname).toBe(
-          booking.lastname,
-        );
-        expect(body.booking.totalprice).toBe(
-          booking.totalprice,
-        );
-        expect(body.booking.depositpaid).toBe(
-          booking.depositpaid,
-        );
+        expect(body.booking.firstname).toBe(booking.firstname);
+        expect(body.booking.lastname).toBe(booking.lastname);
+        expect(body.booking.totalprice).toBe(booking.totalprice);
+        expect(body.booking.depositpaid).toBe(booking.depositpaid);
       },
     );
   },
