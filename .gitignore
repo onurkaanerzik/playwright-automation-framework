@@ -8,3 +8,7 @@ node_modules/
 
 # Authentication state
 .auth/
+
+# Environment files
+.env
+!.env.example
