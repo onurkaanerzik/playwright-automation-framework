@@ -76,20 +76,20 @@ The framework supports UI and API automation through reusable architectural laye
 
 ## 🛠 Technology Stack
 
-| Category | Technology |
-| --- | --- |
-| Language | TypeScript |
-| Automation | Playwright |
-| Runtime | Node.js |
-| Package Manager | npm |
-| UI Architecture | Page Object Model + Component Objects |
-| API Architecture | API Client + Resource Layer |
-| Environment | dotenv |
-| Code Quality | ESLint + Prettier |
-| Reporting | HTML + List + JUnit |
-| CI/CD | GitHub Actions |
-| Security Analysis | CodeQL |
-| Dependency Management | Dependabot |
+| Category              | Technology                            |
+| --------------------- | ------------------------------------- |
+| Language              | TypeScript                            |
+| Automation            | Playwright                            |
+| Runtime               | Node.js                               |
+| Package Manager       | npm                                   |
+| UI Architecture       | Page Object Model + Component Objects |
+| API Architecture      | API Client + Resource Layer           |
+| Environment           | dotenv                                |
+| Code Quality          | ESLint + Prettier                     |
+| Reporting             | HTML + List + JUnit                   |
+| CI/CD                 | GitHub Actions                        |
+| Security Analysis     | CodeQL                                |
+| Dependency Management | Dependabot                            |
 
 ---
 
@@ -297,16 +297,16 @@ Environment-specific configuration is resolved through the framework's configura
 
 ## ⚙ Available Commands
 
-| Command | Description |
-| --- | --- |
-| `npm test` | Execute all tests |
-| `npm run test:e2e` | Execute UI tests |
-| `npm run test:api` | Execute API tests |
-| `npm run lint` | Run ESLint |
-| `npm run format` | Format source code |
-| `npm run format:check` | Validate formatting |
-| `npm run typecheck` | Run TypeScript type checking |
-| `npm run report` | Open Playwright HTML report |
+| Command                | Description                  |
+| ---------------------- | ---------------------------- |
+| `npm test`             | Execute all tests            |
+| `npm run test:e2e`     | Execute UI tests             |
+| `npm run test:api`     | Execute API tests            |
+| `npm run lint`         | Run ESLint                   |
+| `npm run format`       | Format source code           |
+| `npm run format:check` | Validate formatting          |
+| `npm run typecheck`    | Run TypeScript type checking |
+| `npm run report`       | Open Playwright HTML report  |
 
 To execute the complete Playwright suite directly:
 
