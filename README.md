@@ -1,88 +1,243 @@
-# 🚀 Playwright Automation Framework
+# 🚀 Playwright + TypeScript Test Automation Framework
 
-> A production-ready UI and API test automation framework built with Playwright and TypeScript, demonstrating modern QA automation engineering practices including clean architecture, reusable design patterns, type-safe development, and continuous integration.
+[![Playwright Tests](https://github.com/onurkaanerzik/playwright-automation-framework/actions/workflows/playwright.yml/badge.svg)](https://github.com/onurkaanerzik/playwright-automation-framework/actions/workflows/playwright.yml)
+[![CodeQL](https://github.com/onurkaanerzik/playwright-automation-framework/actions/workflows/codeql.yml/badge.svg)](https://github.com/onurkaanerzik/playwright-automation-framework/actions/workflows/codeql.yml)
+
+> A portfolio-grade UI and API test automation framework built with Playwright and TypeScript, demonstrating scalable automation architecture, reusable design patterns, type-safe development, cross-browser testing, and continuous integration.
 
 ---
 
 ## 📌 Project Overview
 
-This project demonstrates how a modern test automation framework can be designed using software engineering best practices rather than simply organizing Playwright tests.
+This project demonstrates how a modern test automation framework can be designed using software engineering and quality engineering practices rather than simply organizing automated tests.
 
-### Objectives
+The framework supports UI and API automation through reusable architectural layers and integrates automated quality gates through GitHub Actions.
 
-- Build a scalable automation framework
-- Support both UI and API automation
-- Promote reusable architecture
-- Improve maintainability
-- Ensure type safety
-- Integrate automated quality gates
-- Follow enterprise QA engineering practices
+### Current Test Suite
+
+- **53 automated test executions**
+- **18 test files**
+- UI end-to-end automation
+- API automation
+- Chromium, Firefox, and WebKit execution
+- Authentication state reuse
+- Network mocking
+- CI/CD execution through GitHub Actions
+
+> Playwright reports 53 executions because UI scenarios are executed independently across Chromium, Firefox, and WebKit.
 
 ---
 
 ## ✨ Key Features
 
-### UI Automation
+### 🖥 UI Automation
 
 - Page Object Model (POM)
 - Component Object Pattern
-- Authentication State
-- Cross-browser Testing
-- Parallel Execution
-- Screenshot / Video / Trace Collection
+- Reusable authentication state
+- Cross-browser testing
+- Parallel execution
+- End-to-end purchase workflows
+- Negative test scenarios
+- Checkout and price validation
+- Screenshots, videos, and traces on failure
 
-### API Automation
+### 🔌 API Automation
 
-- API Client Layer
-- Resource-based Architecture
-- CRUD Testing
-- Typed Request Models
-- Typed Response Models
-- API Assertions
+- Reusable API client layer
+- Resource-based API architecture
+- Authentication API testing
+- CRUD operations
+- Typed request and response models
+- Centralized API assertions
+- API response mocking
 
-### Framework Features
+### 🏗 Framework Engineering
 
-- Custom Fixtures
-- Environment Management
-- Test Data Factories
-- Network Mocking
-- Strong Type Safety
+- Custom Playwright fixtures
+- Environment configuration profiles
+- Test data factories
+- Reusable page and component objects
+- Network mocking
+- Strong TypeScript typing
+- Centralized logging
 
-### Code Quality
+### 🔍 Code Quality & CI/CD
 
 - TypeScript
 - ESLint
 - Prettier
 - GitHub Actions
-- CodeQL
+- CodeQL analysis
 - Dependabot
+- Automated quality gates
 
 ---
 
 ## 🛠 Technology Stack
 
-| Category        | Technology          |
-| --------------- | ------------------- |
-| Language        | TypeScript          |
-| Automation      | Playwright          |
-| Runtime         | Node.js             |
-| Package Manager | npm                 |
-| Environment     | dotenv              |
-| Code Quality    | ESLint + Prettier   |
-| Reporting       | HTML + List + JUnit |
-| CI/CD           | GitHub Actions      |
+| Category | Technology |
+| --- | --- |
+| Language | TypeScript |
+| Automation | Playwright |
+| Runtime | Node.js |
+| Package Manager | npm |
+| UI Architecture | Page Object Model + Component Objects |
+| API Architecture | API Client + Resource Layer |
+| Environment | dotenv |
+| Code Quality | ESLint + Prettier |
+| Reporting | HTML + List + JUnit |
+| CI/CD | GitHub Actions |
+| Security Analysis | CodeQL |
+| Dependency Management | Dependabot |
 
 ---
 
 ## 🏗 Framework Architecture
 
-ASCII Architecture Diagram
+```text
+                         ┌─────────────────────┐
+                         │     Test Suites     │
+                         │                     │
+                         │   UI / API / Auth   │
+                         └──────────┬──────────┘
+                                    │
+                    ┌───────────────┴───────────────┐
+                    │                               │
+                    ▼                               ▼
+          ┌──────────────────┐            ┌──────────────────┐
+          │   UI Automation  │            │  API Automation  │
+          └────────┬─────────┘            └────────┬─────────┘
+                   │                               │
+          ┌────────▼─────────┐            ┌────────▼─────────┐
+          │   Page Objects   │            │   API Resources  │
+          │   Components     │            │   API Assertions │
+          └────────┬─────────┘            └────────┬─────────┘
+                   │                               │
+                   └───────────────┬───────────────┘
+                                   │
+                          ┌────────▼────────┐
+                          │ Custom Fixtures │
+                          └────────┬────────┘
+                                   │
+               ┌───────────────────┼───────────────────┐
+               │                   │                   │
+               ▼                   ▼                   ▼
+        ┌─────────────┐     ┌─────────────┐     ┌─────────────┐
+        │ Test Data   │     │ Environment │     │   Mocks     │
+        │ Factories   │     │   Config    │     │             │
+        └─────────────┘     └─────────────┘     └─────────────┘
+```
+
+The architecture separates test scenarios from implementation details, allowing UI components, API resources, test data, configuration, and fixtures to evolve independently.
 
 ---
 
 ## 📂 Project Structure
 
-Folder Tree
+```text
+playwright-automation-framework/
+│
+├── .github/
+│   ├── workflows/
+│   │   ├── playwright.yml
+│   │   └── codeql.yml
+│   └── dependabot.yml
+│
+├── src/
+│   ├── api/
+│   │   ├── assertions/
+│   │   ├── clients/
+│   │   ├── models/
+│   │   └── resources/
+│   │
+│   ├── components/
+│   │   ├── CookieBanner.ts
+│   │   ├── Footer.ts
+│   │   ├── Header.ts
+│   │   └── NavigationBar.ts
+│   │
+│   ├── config/
+│   │   ├── environment.ts
+│   │   ├── profiles.ts
+│   │   └── types.ts
+│   │
+│   ├── data/
+│   │   ├── factories/
+│   │   ├── models/
+│   │   └── test data
+│   │
+│   ├── fixtures/
+│   │   └── app.fixture.ts
+│   │
+│   ├── mocks/
+│   │   ├── data/
+│   │   └── handlers/
+│   │
+│   ├── pages/
+│   │   ├── BasePage.ts
+│   │   ├── LoginPage.ts
+│   │   ├── InventoryPage.ts
+│   │   ├── CartPage.ts
+│   │   └── Checkout Pages
+│   │
+│   └── utils/
+│       └── Logger.ts
+│
+├── tests/
+│   ├── api/
+│   ├── auth/
+│   └── e2e/
+│
+├── playwright.config.ts
+├── eslint.config.mjs
+├── tsconfig.json
+├── package.json
+└── README.md
+```
+
+---
+
+## 🧪 Test Coverage
+
+### UI / E2E Scenarios
+
+The UI automation suite currently covers:
+
+- Application health check
+- Authentication validation
+- Invalid credentials
+- Locked-user validation
+- Inventory validation
+- Product sorting
+- Cart operations
+- Checkout validation
+- Price validation
+- Single-product purchase flow
+- Multi-product purchase flow
+- Logout
+- Product API interception / mocking
+
+UI scenarios are executed across:
+
+- Chromium
+- Firefox
+- WebKit
+
+### API Scenarios
+
+The API suite includes:
+
+- Authentication token creation
+- Retrieve booking
+- Create booking
+- Update booking
+- Partial booking update
+- Delete booking
+- Retrieve user
+- Retrieve users collection
+- Create user
+- Mock API response validation
 
 ---
 
@@ -97,7 +252,8 @@ Folder Tree
 ### Clone Repository
 
 ```bash
-git clone ...
+git clone https://github.com/onurkaanerzik/playwright-automation-framework.git
+cd playwright-automation-framework
 ```
 
 ### Install Dependencies
@@ -106,7 +262,7 @@ git clone ...
 npm ci
 ```
 
-### Install Playwright
+### Install Playwright Browsers
 
 ```bash
 npx playwright install
@@ -116,163 +272,166 @@ npx playwright install
 
 ## 🌍 Environment Configuration
 
-Supported environments
+The framework supports environment-based configuration profiles.
 
-```
+Available profiles include:
+
+```text
 local
 dev
 staging
 production
 ```
 
-Example `.env`
+Create a local `.env` file based on the provided `.env.example`.
 
-```env
-APP_ENV=local
-BASE_URL=...
-API_BASE_URL=...
+```bash
+cp .env.example .env
 ```
+
+Environment-specific configuration is resolved through the framework's configuration layer.
+
+> Local environment files and authentication state are excluded from version control.
 
 ---
 
 ## ⚙ Available Commands
 
-| Command              | Description         |
-| -------------------- | ------------------- |
-| npm test             | Execute all tests   |
-| npm run test:e2e     | UI Tests            |
-| npm run test:api     | API Tests           |
-| npm run lint         | ESLint              |
-| npm run format       | Format source code  |
-| npm run format:check | Validate formatting |
-| npm run typecheck    | Type Checking       |
-| npm run report       | HTML Report         |
+| Command | Description |
+| --- | --- |
+| `npm test` | Execute all tests |
+| `npm run test:e2e` | Execute UI tests |
+| `npm run test:api` | Execute API tests |
+| `npm run lint` | Run ESLint |
+| `npm run format` | Format source code |
+| `npm run format:check` | Validate formatting |
+| `npm run typecheck` | Run TypeScript type checking |
+| `npm run report` | Open Playwright HTML report |
+
+To execute the complete Playwright suite directly:
+
+```bash
+npx playwright test
+```
+
+To inspect all configured test executions:
+
+```bash
+npx playwright test --list
+```
 
 ---
 
-## 🧪 Framework Capabilities
+## 📊 Reporting & Failure Analysis
 
-### Reporting
+The framework provides:
 
-- HTML Report
-- List Reporter
-- JUnit Reporter
+- Playwright HTML reports
+- List reporter
+- JUnit output
+- Screenshots on failure
+- Video recordings
+- Trace files
 
-### Failure Artifacts
+After a local execution, the HTML report can be opened with:
 
-- Screenshots
-- Videos
-- Trace Files
+```bash
+npx playwright show-report
+```
 
-### Browser Support
-
-- Chromium
-- Firefox
-- WebKit
+CI executions also publish test artifacts for failure analysis.
 
 ---
 
 ## 🔄 Continuous Integration
 
-GitHub Actions pipeline
+Every relevant push or pull request is validated through GitHub Actions.
 
-```
-Checkout
-    │
+```text
+Checkout Repository
+        │
+        ▼
 Install Dependencies
-    │
-TypeScript
-    │
+        │
+        ▼
+Install Playwright Browsers
+        │
+        ▼
+TypeScript Validation
+        │
+        ▼
 ESLint
-    │
-Prettier
-    │
+        │
+        ▼
+Prettier Check
+        │
+        ▼
 Playwright Tests
-    │
-Reports
-    │
-Artifacts
+        │
+        ▼
+Test Reports & Artifacts
 ```
 
-### Quality Gates
+### Automated Quality Gates
 
-- Type Checking
+- Type checking
 - ESLint
-- Prettier
-- Playwright Tests
+- Prettier validation
+- Playwright test execution
+- Cross-browser validation
+- Test artifact generation
+
+### CI Status
+
+The latest workflow executions can be viewed here:
+
+[View Playwright CI Runs](https://github.com/onurkaanerzik/playwright-automation-framework/actions/workflows/playwright.yml)
+
+[View CodeQL Analysis](https://github.com/onurkaanerzik/playwright-automation-framework/actions/workflows/codeql.yml)
 
 ---
 
-## 💡 Design Decisions
+## 💡 Key Design Decisions
 
-### Why Page Object Model?
+### Page Object Model
 
-- Better maintainability
-- Reduced duplication
-- Cleaner test scenarios
+Separates test scenarios from page implementation details and improves maintainability.
 
----
+### Component Objects
 
-### Why Component Objects?
+Encapsulates reusable UI elements such as navigation, headers, footers, and banners.
 
-- Reusable UI elements
-- Better separation of concerns
+### Custom Fixtures
 
----
+Centralizes dependency creation and provides reusable test context.
 
-### Why Fixtures?
+### API Resource Layer
 
-- Centralized dependency management
-- Cleaner test setup
-- Reusable test context
+Separates HTTP operations from test scenarios and enables reusable API interactions.
 
----
+### Typed Models
 
-### Why API Resource Layer?
+Provides compile-time validation, safer refactoring, and better development tooling.
 
-- Encapsulated HTTP logic
-- Cleaner API tests
-- Reusable operations
+### Test Data Factories
 
----
+Provides reusable and consistent test data generation.
 
-### Why Typed Models?
+### Network Mocking
 
-- Compile-time validation
-- Better IntelliSense
-- Safer refactoring
+Allows controlled API responses and more deterministic test scenarios.
 
----
+### Environment Management
 
-### Why Test Data Factories?
+Centralizes environment configuration and supports multiple execution profiles.
 
-- Reusable data generation
-- Consistent test data
-- Easier maintenance
+### Authentication State
 
----
+Avoids unnecessary repeated authentication and improves execution efficiency.
 
-### Why Network Mocking?
+### GitHub Actions
 
-- Stable UI tests
-- Faster execution
-- Backend-independent validation
-
----
-
-### Why Environment Management?
-
-- Centralized configuration
-- Easier environment switching
-- Cleaner configuration management
-
----
-
-### Why GitHub Actions?
-
-- Automated validation
-- Continuous Integration
-- Reliable quality checks
+Provides automated validation and continuous feedback for every framework change.
 
 ---
 
@@ -280,56 +439,54 @@ Artifacts
 
 ### ✅ Completed
 
-- Framework Foundation
-- UI Automation
-- API Automation
-- Custom Fixtures
-- Authentication State
-- Environment Management
-- API Client
-- CRUD Testing
-- Mocking
-- GitHub Actions
+- Framework foundation
+- UI automation
+- API automation
+- Page Object Model
+- Component Object Pattern
+- Custom fixtures
+- Authentication state
+- Environment management
+- API client and resource layers
+- CRUD API testing
+- Test data factories
+- Network mocking
+- Cross-browser execution
+- GitHub Actions CI
 - CodeQL
 - Dependabot
 - Prettier
 - ESLint
-
----
-
-### 🚧 In Progress
-
-- Documentation
-- Repository Polish
-- Architecture Documentation
-
----
+- Automated reporting
 
 ### 📌 Planned
 
-- Docker Support
-- Scheduled Regression
-- Advanced Reporting
-- External Test Management
+- Docker support
+- Scheduled regression execution
+- Advanced reporting
+- External test management integration
+- Additional API and UI scenarios
 
 ---
 
 ## 👨‍💻 Author
 
-**Onur Kaan Erzik**
+**Onur Kaan Erzik**  
+Senior QA Automation Engineer  
+Berlin, Germany
 
-Senior QA Automation Engineer
-
-📍 Berlin, Germany
-
-GitHub
-
-LinkedIn
+- [GitHub](https://github.com/onurkaanerzik)
+- [LinkedIn](https://www.linkedin.com/in/onurkaanerzik/)
 
 ---
 
-## ⭐ Support
+## 🔗 Repository
 
-If you found this project useful, consider giving it a star.
+**GitHub:**  
+https://github.com/onurkaanerzik/playwright-automation-framework
 
-Contributions, suggestions and discussions are always welcome.
+---
+
+## ⭐ About This Project
+
+This repository is maintained as a practical demonstration of modern QA automation engineering, combining UI testing, API testing, reusable framework architecture, code quality controls, and CI/CD practices in a single project.
