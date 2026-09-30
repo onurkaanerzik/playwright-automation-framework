@@ -14,9 +14,7 @@ export class NavigationBar {
       name: 'Open Menu',
     });
 
-    this.logoutLink = page.getByRole('link', {
-      name: 'Logout',
-    });
+    this.logoutLink = page.locator('[data-test="logout-sidebar-link"]');
   }
 
   async logout(): Promise<void> {
